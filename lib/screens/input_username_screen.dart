@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:quizqu/screens/home_screen.dart';
+
+import 'home_screen.dart';
 
 class InputUsernameScreen extends StatefulWidget {
   const InputUsernameScreen({super.key});
