@@ -1,32 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import 'providers/quiz_provider.dart';
-import 'screens/input_username_screen.dart';
+import 'config/routes.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => QuizProvider(),
-      child: const QuizApp(),
-    ),
-  );
+  runApp(const QuizQuApp());
 }
- 
-class QuizApp extends StatelessWidget {
-  const QuizApp({Key? key}) : super(key: key);
+
+class QuizQuApp extends StatelessWidget {
+  const QuizQuApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Quiz App',
-      debugShowCheckedModeBanner: false,
+    return MaterialApp.router(
+      title: 'QuizQu',
       theme: ThemeData(
+        useMaterial3: true,
         fontFamily: 'Poppins',
-        primarySwatch: Colors.blue,
-        scaffoldBackgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF3B56E0)),
       ),
-      home: const InputUsernameScreen(),
+      routerConfig: appRouter,
+      debugShowCheckedModeBanner: false,
     );
   }
 }

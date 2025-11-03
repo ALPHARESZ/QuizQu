@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quizqu/screens/home_screen.dart';
 
 class InputUsernameScreen extends StatefulWidget {
   const InputUsernameScreen({super.key});
@@ -139,20 +140,32 @@ class _InputUsernameScreenState extends State<InputUsernameScreen> {
                         ),
                       ),
                       SizedBox(height: size.height * 0.07),
-
+ 
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (_nameController.text.isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Nama pengguna tidak boleh kosong!'),
-                                ),
-                              );
-                              return;
-                            }
-                            context.push('/quiz', extra: _nameController.text);
+                            FocusScope.of(context).unfocus();
+                            Future.delayed(const Duration(milliseconds: 200), () {
+                              if (_nameController.text.trim().isNotEmpty) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        HomeScreen(username: _nameController.text.trim()),
+                                  ),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      "Nama tidak boleh kosong!",
+                                      style: TextStyle(fontFamily: 'Poppins'),
+                                    ),
+                                  ),
+                                );
+                              }
+                            });
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF3B56E0),
