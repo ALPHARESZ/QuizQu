@@ -105,7 +105,7 @@ class HomeScreen extends StatelessWidget {
                         primaryColor: primaryColor,
                         isTablet: isTablet,
                         onTap: () {
-                          context.push('/result', extra: 0); // sementara
+                          context.push('/result', extra: 0);
                         },
                       ),
                     );
@@ -118,4 +118,4 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
+} 
