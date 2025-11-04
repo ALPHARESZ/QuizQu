@@ -20,43 +20,46 @@ class HomeScreen extends StatelessWidget {
     double fontScale(double mobile, double tablet) =>
         isTablet ? tablet : mobile;
 
+    final double topContainerHeight = size.height * 0.35;
+    final double overlapOffset = size.height * 0.08;
+    final double bottomContainerMinHeight = size.height - topContainerHeight + overlapOffset;
+
     final List<Map<String, String>> categories = [
       {
         'title': 'Struktur Data dan Algoritma',
         'questions': '10 Pertanyaan',
-        'time': '60 Menit',
+        'time': '20 Menit',
         'image': 'assets/images/DSA.png',
       },
       {
         'title': 'Human Computer Interaction',
         'questions': '10 Pertanyaan',
-        'time': '60 Menit',
+        'time': '20 Menit',
         'image': 'assets/images/HCI.png',
       },
       {
         'title': 'Pemrograman Mobile',
         'questions': '10 Pertanyaan',
-        'time': '60 Menit',
+        'time': '20 Menit',
         'image': 'assets/images/MP.png',
       },
       {
         'title': 'Basis Data',
         'questions': '10 Pertanyaan',
-        'time': '60 Menit',
+        'time': '20 Menit',
         'image': 'assets/images/DB.png',
       },
     ];
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color(0xFFD9D9D9),
-        body: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: const Color(0xFFD9D9D9),
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             children: [
-              // Header
               Container(
                 width: double.infinity,
-                height: size.height * 0.25,
+                height: topContainerHeight,
                 decoration: BoxDecoration(
                   color: primaryColor,
                 ),
@@ -75,13 +78,17 @@ class HomeScreen extends StatelessWidget {
                         fit: BoxFit.contain,
                       ),
                       SizedBox(width: size.width * 0.04),
-                      Text(
-                        'Halo, $username',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: fontScale(36, 46),
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
+                      Expanded(
+                        child: Text(
+                          username,
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: fontScale(36, 46),
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
                       ),
                     ],
@@ -89,50 +96,72 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: size.height * 0.05),
+              Transform.translate(
+                offset: Offset(0, -overlapOffset),
+                child: Container(
+                  width: double.infinity,
+                  constraints: BoxConstraints(
+                    minHeight: bottomContainerMinHeight,
+                  ),
+                  padding: EdgeInsets.only(
+                    top: size.height * 0.05 + overlapOffset,
+                    bottom: size.height * 0.05,
+                    left: isTablet ? size.width * 0.1 : size.width * 0.06,
+                    right: isTablet ? size.width * 0.1 : size.width * 0.06,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(60),
+                      topRight: Radius.circular(60),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      Column(
+                        children: List.generate(categories.length, (index) {
+                          final item = categories[index];
+                          QuizCategory category;
+                          switch (index) {
+                            case 0:
+                              category = QuizCategory.dsa;
+                              break;
+                            case 1:
+                              category = QuizCategory.hci;
+                              break;
+                            case 2:
+                              category = QuizCategory.mp;
+                              break;
+                            case 3:
+                              category = QuizCategory.db;
+                              break;
+                            default:
+                              category = QuizCategory.db;
+                          }
 
-              // Daftar kategori
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: size.width * 0.06),
-                child: Column(
-                  children: List.generate(categories.length, (index) {
-                    final item = categories[index];
-                    QuizCategory category;
-                    switch (index) {
-                      case 0:
-                        category = QuizCategory.dsa;
-                        break;
-                      case 1:
-                        category = QuizCategory.hci;
-                        break;
-                      case 2:
-                        category = QuizCategory.mp;
-                        break;
-                      case 3:
-                        category = QuizCategory.db;
-                        break;
-                      default:
-                        category = QuizCategory.db;
-                    }
-
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: size.height * 0.03),
-                      child: CategoryCard(
-                        title: item['title']!,
-                        questionCount: item['questions']!,
-                        duration: item['time']!,
-                        imagePath: item['image']!,
-                        isSelected: false, // Tidak perlu selected state
-                        primaryColor: primaryColor,
-                        isTablet: isTablet,
-                        onTap: () {
-                          final provider = Provider.of<QuizProvider>(context, listen: false);
-                          provider.loadCategory(category); // Load kategori yang sesuai
-                          context.go('/quiz');
-                        },
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              bottom: isTablet ? size.height * 0.04 : size.height * 0.03,
+                            ),
+                            child: CategoryCard(
+                              title: item['title']!,
+                              questionCount: item['questions']!,
+                              duration: item['time']!,
+                              imagePath: item['image']!,
+                              isSelected: false,
+                              primaryColor: primaryColor,
+                              isTablet: isTablet,
+                              onTap: () {
+                                final provider = Provider.of<QuizProvider>(context, listen: false);
+                                provider.loadCategory(category);
+                                context.go('/quiz');
+                              },
+                            ),
+                          );
+                        }),
                       ),
-                    );
-                  }),
+                    ],
+                  ),
                 ),
               ),
             ],

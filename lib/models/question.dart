@@ -4,13 +4,13 @@ extension QuizCategoryExtension on QuizCategory {
   String get title {
     switch (this) {
       case QuizCategory.dsa:
-        return 'Data Structures and Algorithms';
+        return 'Struktur Data dan Algoritma';
       case QuizCategory.hci:
-        return 'Human-Computer Interaction';
+        return 'Human Computer Interaction';
       case QuizCategory.db:
-        return 'Database Systems';
+        return 'Basis Data';
       case QuizCategory.mp:
-        return 'Mobile Programming';
+        return 'Pemrograman Mobile';
     }
   }
 }

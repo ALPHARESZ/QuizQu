@@ -55,9 +55,9 @@ class ResultScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 30),
                 const Text(
-                  "Skor Kamu",
+                  "Tetap Semangat\nTeruslah Belajar!",
                   style: TextStyle(
-                    color: Colors.black54,
+                    color: Colors.black,
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),
@@ -69,13 +69,13 @@ class ResultScreen extends StatelessWidget {
                     backgroundColor: const Color(0xFF3B56E0),
                     padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 18),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(50),
                     ),
                   ),
                   child: const Text(
                     "Kembali ke Awal",
                     style: TextStyle(
-                      color: Colors.black54,
+                      color: Colors.white,
                       fontSize: 16, 
                       fontWeight: FontWeight.w600),
                   ),

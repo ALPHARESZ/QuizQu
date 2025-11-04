@@ -20,9 +20,7 @@ class _InputUsernameScreenState extends State<InputUsernameScreen> {
         isTablet ? tablet : mobile;
   
     final double topContainerHeight = size.height * 0.35;
-
     final double overlapOffset = size.height * 0.08;
-     
     final double bottomContainerMinHeight = size.height - topContainerHeight + overlapOffset;
 
     return SafeArea(

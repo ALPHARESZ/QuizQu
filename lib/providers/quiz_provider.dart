@@ -78,6 +78,6 @@ class QuizProvider extends ChangeNotifier {
         score++;
       }
     }
-    return score;
+    return score * 20;
   }
 }
