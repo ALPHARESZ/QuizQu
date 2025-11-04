@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/quiz_provider.dart';
+import '../models/question.dart';
 import 'answer_tile.dart';
 
 class QuestionCard extends StatelessWidget {
-  final dynamic question;
+  final Question question;
   const QuestionCard({super.key, required this.question});
 
   @override
@@ -24,14 +25,26 @@ class QuestionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            question.text,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+            question.category.title, // Gunakan extension title
+            style: const TextStyle(
+              fontSize: 18, 
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF3B56E0),
+            ),
           ),
           const SizedBox(height: 16),
+          Text(
+            question.question,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(height: 20),
           ...List.generate(
-            question.answers.length,
+            question.options.length,
             (index) => AnswerTile(
-              text: question.answers[index],
+              text: question.options[index],
               selected: provider.isSelected(index),
               onTap: () => provider.selectAnswer(index),
             ),

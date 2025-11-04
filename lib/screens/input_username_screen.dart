@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'home_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class InputUsernameScreen extends StatefulWidget {
   const InputUsernameScreen({super.key});
@@ -148,13 +147,7 @@ class _InputUsernameScreenState extends State<InputUsernameScreen> {
                             FocusScope.of(context).unfocus();
                             Future.delayed(const Duration(milliseconds: 200), () {
                               if (_nameController.text.trim().isNotEmpty) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        HomeScreen(username: _nameController.text.trim()),
-                                  ),
-                                );
+                                context.go('/home', extra: _nameController.text.trim());
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(

@@ -8,7 +8,7 @@ import '../data/mp_data_dummy.dart';
 
 class QuizProvider extends ChangeNotifier {
   String _username = '';
-  List<dynamic> _questions = [];
+  List<Question> _questions = [];
   int _currentIndex = 0;
   int? _selectedAnswer;
   QuizCategory? _category;
@@ -19,9 +19,9 @@ class QuizProvider extends ChangeNotifier {
   }
 
   String get username => _username;
-  List<dynamic> get questions => _questions;
+  List<Question> get questions => _questions;
   int get currentIndex => _currentIndex;
-  dynamic get currentQuestion => _questions[_currentIndex];
+  Question get currentQuestion => _questions[_currentIndex];
   bool get isFinished => _currentIndex >= _questions.length - 1;
   String get categoryName => _category?.title ?? '';
 
@@ -29,16 +29,16 @@ class QuizProvider extends ChangeNotifier {
     _category = category;
     switch (category) {
       case QuizCategory.db:
-        _questions = dbQuestions;
+        _questions = List.from(dbQuestions);
         break;
       case QuizCategory.dsa:
-        _questions = dsaQuestions;
+        _questions = List.from(dsaQuestions);
         break;
       case QuizCategory.hci:
-        _questions = hciQuestions;
+        _questions = List.from(hciQuestions);
         break;
       case QuizCategory.mp:
-        _questions = mpQuestions;
+        _questions = List.from(mpQuestions);
         break;
     }
     _currentIndex = 0;
@@ -48,6 +48,8 @@ class QuizProvider extends ChangeNotifier {
 
   void selectAnswer(int index) {
     _selectedAnswer = index;
+    // Simpan jawaban yang dipilih ke question
+    _questions[_currentIndex].selectedIndex = index;
     notifyListeners();
   }
 
@@ -56,7 +58,7 @@ class QuizProvider extends ChangeNotifier {
   void nextQuestion() {
     if (_currentIndex < _questions.length - 1) {
       _currentIndex++;
-      _selectedAnswer = null;
+      _selectedAnswer = _questions[_currentIndex].selectedIndex;
       notifyListeners();
     }
   }
@@ -64,7 +66,7 @@ class QuizProvider extends ChangeNotifier {
   void previousQuestion() {
     if (_currentIndex > 0) {
       _currentIndex--;
-      _selectedAnswer = null;
+      _selectedAnswer = _questions[_currentIndex].selectedIndex;
       notifyListeners();
     }
   }

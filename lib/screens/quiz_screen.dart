@@ -70,7 +70,7 @@ class QuizScreen extends StatelessWidget {
                     onPressed: () {
                       if (provider.currentIndex == total - 1) {
                         final score = provider.calculateScore();
-                        context.push('/result', extra: score);
+                        context.go('/score', extra: score);
                       } else {
                         provider.nextQuestion();
                       }

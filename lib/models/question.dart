@@ -21,6 +21,7 @@ class Question {
   final String question;
   final List<String> options;
   final int correctIndex;
+  int? selectedIndex;
 
   Question({
     required this.id,
@@ -28,5 +29,8 @@ class Question {
     required this.question,
     required this.options,
     required this.correctIndex,
+    this.selectedIndex,
   });
+
+  bool get isCorrect => selectedIndex == correctIndex;
 }

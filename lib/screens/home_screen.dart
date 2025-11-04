@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/category_card.dart';
+import '../providers/quiz_provider.dart';
+import '../models/question.dart';
 
 class HomeScreen extends StatelessWidget {
   final String username;
@@ -94,6 +97,24 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: List.generate(categories.length, (index) {
                     final item = categories[index];
+                    QuizCategory category;
+                    switch (index) {
+                      case 0:
+                        category = QuizCategory.dsa;
+                        break;
+                      case 1:
+                        category = QuizCategory.hci;
+                        break;
+                      case 2:
+                        category = QuizCategory.mp;
+                        break;
+                      case 3:
+                        category = QuizCategory.db;
+                        break;
+                      default:
+                        category = QuizCategory.db;
+                    }
+
                     return Padding(
                       padding: EdgeInsets.only(bottom: size.height * 0.03),
                       child: CategoryCard(
@@ -101,11 +122,13 @@ class HomeScreen extends StatelessWidget {
                         questionCount: item['questions']!,
                         duration: item['time']!,
                         imagePath: item['image']!,
-                        isSelected: index == 0,
+                        isSelected: false, // Tidak perlu selected state
                         primaryColor: primaryColor,
                         isTablet: isTablet,
                         onTap: () {
-                          context.push('/result', extra: 0);
+                          final provider = Provider.of<QuizProvider>(context, listen: false);
+                          provider.loadCategory(category); // Load kategori yang sesuai
+                          context.go('/quiz');
                         },
                       ),
                     );

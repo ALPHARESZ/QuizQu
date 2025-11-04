@@ -74,7 +74,10 @@ class ResultScreen extends StatelessWidget {
                   ),
                   child: const Text(
                     "Kembali ke Awal",
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 16, 
+                      fontWeight: FontWeight.w600),
                   ),
                 ),
               ],
