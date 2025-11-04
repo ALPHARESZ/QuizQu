@@ -16,6 +16,6 @@ Video Singkat Aplikasi : https://drive.google.com/drive/folders/1KEg96hKRh1jqxdP
 # Prototype / Mockup
 Desain : https://www.figma.com/design/UxgOmXi6dPkmfMaOHTj87P/UTS-Pemrograman-Mobile-Lab-5?node-id=0-1&p=f&t=mDnlK7CR7IekTJ52-0 <br>
 Referensi : [ <br>
-    figma.com/design/p03CfUqeia99WNCnXazyJF/Quiz-App-Design--Community-?t=I2Q24Xn8oTTdpz9a-0 , <br>
+    ffigma.com/design/UxgOmXi6dPkmfMaOHTj87P/UTS-Pemrograman-Mobile-Lab-5?t=2IRFvfNs1Tg7vJHD-0 , <br>
     https://play.google.com/store/apps/details?id=com.pahamify.android <br>
 ]
