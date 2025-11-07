@@ -7,7 +7,7 @@ import 'providers/quiz_provider.dart';
 void main() {
   runApp(const QuizQuApp());
 }
-
+ 
 class QuizQuApp extends StatelessWidget {
   const QuizQuApp({super.key});
 

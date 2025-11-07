@@ -48,7 +48,6 @@ class QuizProvider extends ChangeNotifier {
 
   void selectAnswer(int index) {
     _selectedAnswer = index;
-    // Simpan jawaban yang dipilih ke question
     _questions[_currentIndex].selectedIndex = index;
     notifyListeners();
   }

@@ -61,7 +61,6 @@ class CategoryCard extends StatelessWidget {
               ),
               const SizedBox(width: 16),
 
-              // Detail
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

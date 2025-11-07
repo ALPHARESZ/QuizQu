@@ -25,7 +25,7 @@ class QuestionCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            question.category.title, // Gunakan extension title
+            question.category.title, 
             style: const TextStyle(
               fontSize: 18, 
               fontWeight: FontWeight.w600,
